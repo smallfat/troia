@@ -7,9 +7,11 @@
 
 #include "troia/base/noncopyable.h"
 #include "troia/base/Mutex.h"
+#include "troia/net/Poller.h"
 #include <atomic>
 #include <vector>
 #include <functional>
+#include <memory>
 
 namespace troia
 {
@@ -36,6 +38,9 @@ namespace net
 
         MutexLock m_mutex;
         std::vector<Functor> m_functors_pending;
+
+        std::unique_ptr<Poller> m_pooler;
+        ListChannel m_active_channels;
     };
 
 }

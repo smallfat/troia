@@ -4,11 +4,18 @@
 
 #include <iostream>
 #include "EventLoop.h"
+#include "troia/net/poller/EpollPoller.h"
+#include "troia/net/Channel.h"
 
 using namespace troia;
 using namespace troia::net;
 
+
+
 EventLoop::EventLoop()
+    : m_loop(false),
+    m_quit(false),
+    m_pooler(new EpollPoller())
 {
     std::cout << "event loop" << std::endl;
 }
@@ -21,11 +28,16 @@ EventLoop::~EventLoop()
 void EventLoop::loop()
 {
     m_loop = true;
-    m_quit = false;
 
     while(m_quit)
     {
         //i/o
+        m_pooler->poll(&m_active_channels);
+
+        for (Channel* c : m_active_channels)
+        {
+            c->handle_event();
+        }
 
 
         //pending callbacks

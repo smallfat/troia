@@ -22,9 +22,6 @@ namespace net
         virtual ~EpollPoller();
 
     public:
-        bool init();
-        void uninit();
-
         void poll(ListChannel* channels);
 
     private:
@@ -33,6 +30,8 @@ namespace net
     private:
         int m_epoll_fd;
         EventList m_events;
+
+        static const int m_events_size = 16;
     };
 }
 }

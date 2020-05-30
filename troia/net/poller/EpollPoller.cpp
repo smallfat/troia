@@ -11,28 +11,13 @@ using namespace troia;
 using namespace net;
 
 EpollPoller::EpollPoller()
-    : m_events(16)
+    : m_events(m_events_size),
+      m_epoll_fd(::epoll_create1(EPOLL_CLOEXEC))
 {
 
 }
 
 EpollPoller::~EpollPoller()
-{
-
-}
-
-bool EpollPoller::init()
-{
-    m_epoll_fd = ::epoll_create1(EPOLL_CLOEXEC);
-    if (m_epoll_fd < 0)
-    {
-        return false;
-    }
-
-    return true;
-}
-
-void EpollPoller::uninit()
 {
     ::close(m_epoll_fd);
 }

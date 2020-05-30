@@ -15,7 +15,7 @@ namespace net
 {
     typedef std::function<void()> WriteCallback;
     typedef std::function<void()> CloseCallback;
-    typedef std::function<void(TimeStamp)> ReadCallback;
+    typedef std::function<void()> ReadCallback;
 
     class Channel : public noncopyable {
     public:
