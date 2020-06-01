@@ -36,4 +36,7 @@ cmake_install.cmake
 Makefile
 CMakeFiles/
 CMakeCache.txt
-.idea/ 
+.idea/
+TcpServer
+install_manifest.txt
+*.cbp 

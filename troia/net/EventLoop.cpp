@@ -29,7 +29,7 @@ void EventLoop::loop()
 {
     m_loop = true;
 
-    while(m_quit)
+    while(!m_quit)
     {
         //i/o
         m_pooler->poll(&m_active_channels);
