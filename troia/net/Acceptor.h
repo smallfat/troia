@@ -14,12 +14,13 @@ namespace troia
 namespace net
 {
     class INetAddress;
+    class EventLoop;
 
     typedef std::function<void (int fd, const INetAddress&)> ConnectionCallback;
 
     class Acceptor : public noncopyable {
     public:
-        Acceptor(INetAddress& listenAddr);
+        Acceptor(INetAddress& listenAddr, EventLoop *loop);
         virtual ~Acceptor();
 
     public:
@@ -33,8 +34,9 @@ namespace net
 
 
     private:
-        Channel *m_channel;
         Socket m_socket;
+        Channel *m_channel;
+        EventLoop *m_loop;
 
         ConnectionCallback m_connection_callback;
     };

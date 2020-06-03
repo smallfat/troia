@@ -60,4 +60,7 @@ void EventLoop::exec_pending_functors()
     }
 }
 
-
+void EventLoop::updateChannel(Channel* channel)
+{
+    m_pooler->updateChannel(channel);
+}

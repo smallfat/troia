@@ -24,11 +24,18 @@ namespace net
     public:
         void poll(ListChannel* channels);
 
+        void updateChannel(Channel* channel);
+
     private:
         void fill_channels(int events_num, ListChannel* channels);
 
+        void update(int operation, Channel* channel);
+
     private:
+        //fd for epoll events controlling
         int m_epoll_fd;
+
+
         EventList m_events;
 
         static const int m_events_size = 16;

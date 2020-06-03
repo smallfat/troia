@@ -17,17 +17,49 @@ namespace net
     typedef std::function<void()> CloseCallback;
     typedef std::function<void()> ReadCallback;
 
+    enum POLL_CTRL_TYPE
+    {
+        pctNew = 0,
+        pctModify,
+        pctDelete,
+    };
+
     class Channel : public noncopyable {
     public:
-        Channel(int fd);
+        Channel(int fd, int index);
         virtual ~Channel();
 
     public:
         void handle_event();
 
+        int get_fd()
+        {
+            return m_fd;
+        }
+
+        int get_events()
+        {
+            return m_events;
+        }
+
         void set_events(int events)
         {
             m_events = events;
+        }
+
+        void set_recv_events(int events)
+        {
+            m_recv_events = events;
+        }
+
+        void set_index(int index)
+        {
+            m_index = index;
+        }
+
+        int get_index()
+        {
+            return m_index;
         }
 
         inline void set_read_callback(const ReadCallback& callback)
@@ -48,7 +80,15 @@ namespace net
 
     private:
         int m_fd;
+
+        //set events
         int m_events;
+
+        //received events
+        int m_recv_events;
+
+        //index for events control
+        int m_index;
 
         ReadCallback m_read_callback;
         WriteCallback m_write_callback;

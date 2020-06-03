@@ -27,6 +27,8 @@ namespace net
     public:
         virtual void poll(ListChannel* channels) = 0;
 
+        virtual void updateChannel(Channel* channel) = 0;
+
     protected:
         MapChannel m_channel_map;
     };

@@ -29,7 +29,7 @@ namespace net
 
         explicit INetAddress(std::string ip, uint16_t port);
 
-        virtual ~INetAddress();
+        virtual ~INetAddress() {}
 
     public:
         sa_family_t family() const

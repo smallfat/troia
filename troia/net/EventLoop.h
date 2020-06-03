@@ -29,6 +29,8 @@ namespace net
     public:
         void loop();
 
+        void updateChannel(Channel* channel);
+
     private:
         void exec_pending_functors();
 
